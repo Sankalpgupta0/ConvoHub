@@ -153,7 +153,7 @@ const MessagePage = () => {
     link.click();
   }
 
-  useEffect(() => {git init
+  useEffect(() => {
     if (socketConnection) {
       socketConnection.emit('message-page', params.userId)
 
