@@ -12,6 +12,14 @@ const Home = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
+    const token = useSelector((state) => state.user.token)
+
+    const isLogin = () => {
+        if(!token){
+            navigate('/email')
+        }
+    }
+
     // console.log('user', user)
     const fetchUserDetails = async () => {
         try {
@@ -34,6 +42,7 @@ const Home = () => {
     }
 
     useEffect(() => {
+        isLogin()
         fetchUserDetails()
     }, [])
 
