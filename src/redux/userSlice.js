@@ -30,6 +30,7 @@ export const userSlice = createSlice({
       state.profile_pic = ""
       state.token = ""
       state.socketConnection = null
+      localStorage.removeItem('token')
     },
     setOnlineUser: (state, action) => {
       state.onlineUser = action.payload
