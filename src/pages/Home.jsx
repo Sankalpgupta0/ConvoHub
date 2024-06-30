@@ -15,7 +15,7 @@ const Home = () => {
     const token = useSelector((state) => state.user.token)
 
     const isLogin = () => {
-        if(!token){
+        if(!localStorage.getItem('token')){
             navigate('/email')
         }
     }
