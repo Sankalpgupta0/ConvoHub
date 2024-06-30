@@ -8,7 +8,6 @@ import Sidebar from '../components/SideBar.jsx'
 import io from 'socket.io-client'
 
 const Home = () => {
-    const user = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
@@ -28,7 +27,7 @@ const Home = () => {
                 dispatch(logout())
                 navigate("/email")
             }
-            console.log("current user Details", response)
+            // console.log("current user Details", response)
         } catch (error) {
             console.log("error", error)
         }

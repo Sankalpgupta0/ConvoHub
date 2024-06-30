@@ -37,6 +37,7 @@ const MessagePage = () => {
   const [loading, setLoading] = useState(false)
   const [allMessage, setAllMessage] = useState([])
   const currentMessage = useRef(null)
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     if (currentMessage.current) {
@@ -124,7 +125,7 @@ const MessagePage = () => {
         }
       })
         .then((res) => setMessage(preve => {
-          console.log(res.data.data)
+          // console.log(res.data.data)
           return {
             ...preve,
             pdfUrl: res.data.data.url
@@ -181,7 +182,16 @@ const MessagePage = () => {
         text: value
       }
     })
+    adjustTextareaHeight();
   }
+
+  const adjustTextareaHeight = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto'; // Reset height to auto to calculate the new scroll height
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set the height to the scroll height
+    }
+  };
 
   const handleSendMessage = (e) => {
     e.preventDefault()
@@ -206,6 +216,10 @@ const MessagePage = () => {
       }
     }
   }
+
+  useEffect(() => {
+    adjustTextareaHeight(); // Adjust height initially
+  }, [message.text]);
 
 
   return (
@@ -250,7 +264,7 @@ const MessagePage = () => {
           {
             allMessage.map((msg, index) => {
               return (
-                <div key={msg._id} className={` p-1 py-1 rounded w-fit max-w-[280px] md:max-w-sm lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : "bg-white"}`}>
+                <div key={msg._id} className={` p-1 py-1 rounded w-fit max-w-[500px] max-md:max-w-[300px] md:max-w-sm  lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : "bg-white"}`}>
                   <div className='w-full relative'>
                     {
                       msg?.imageUrl && (
@@ -281,7 +295,7 @@ const MessagePage = () => {
                       )
                     }
                   </div>
-                  <p className='px-2'>{msg.text}</p>
+                  <p className='px-2 textOverflowHor'>{msg.text}</p>
                   <p className='text-xs ml-auto w-fit'>{moment(msg.createdAt).format('hh:mm')}</p>
                 </div>
               )
@@ -414,11 +428,16 @@ const MessagePage = () => {
         </div>
 
         {/**input box */}
-        <form className='h-full w-full flex gap-2' onSubmit={handleSendMessage}>
-          <input
+        <form className='h-full w-full flex gap-2' onSubmit={handleSendMessage} 
+        onKeyDown={(e) => {
+          if(e.key == 'Enter')
+            handleSendMessage(e)
+          }}>
+          <textarea
+            ref={textareaRef}
             type='text'
             placeholder='Type here message...'
-            className='py-1 px-4 outline-none w-full h-full'
+            className='py-1 px-4 outline-none w-full max-h-[200px] resize-none '
             value={message.text}
             onChange={handleOnChange}
           />

@@ -14,7 +14,7 @@ import { FaVideo } from "react-icons/fa6";
 import { logout } from '../redux/userSlice';
 import { MdGroupAdd } from "react-icons/md";
 import CreateGroup from './CreateGroup.jsx'
-
+import { FaFilePdf } from "react-icons/fa";
 
 const Sidebar = () => {
   const user = useSelector(state => state?.user)
@@ -59,7 +59,7 @@ const Sidebar = () => {
       })
 
       socketConnection.on('group', (data) => {
-        // console.log("group : ", data);
+        console.log("group : ", data);
         setgroups(data)
       })
     }
@@ -132,7 +132,7 @@ const Sidebar = () => {
           }
           {
             groups.map((group, index) => {
-              console.log(group.lastMsg.text)
+              // console.log(group.lastMsg.text)
               return (
                 <NavLink to={"/group/" + group?._id} key={group?._id} className='flex items-center gap-2 py-3 px-2 border border-transparent hover:border-primary rounded hover:bg-slate-100 cursor-pointer'>
                   <div>
@@ -160,6 +160,14 @@ const Sidebar = () => {
                             <div className='flex items-center gap-1'>
                               <span><FaVideo /></span>
                               {!group?.lastMsg?.text && <span>Video</span>}
+                            </div>
+                          )
+                        }
+                        {
+                          group?.lastMsg?.pdfUrl && (
+                            <div className='flex items-center gap-1'>
+                              <span><FaFilePdf /></span>
+                              {!group?.lastMsg?.text && <span>File</span>}
                             </div>
                           )
                         }
@@ -210,6 +218,14 @@ const Sidebar = () => {
                             <div className='flex items-center gap-1'>
                               <span><FaVideo /></span>
                               {!conv?.lastMsg?.text && <span>Video</span>}
+                            </div>
+                          )
+                        }
+                        {
+                          conv?.lastMsg?.pdfUrl && (
+                            <div className='flex items-center gap-1'>
+                              <span><FaFilePdf /></span>
+                              {!conv?.lastMsg?.text && <span>File</span>}
                             </div>
                           )
                         }
