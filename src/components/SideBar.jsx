@@ -59,7 +59,7 @@ const Sidebar = () => {
       })
 
       socketConnection.on('group', (data) => {
-        console.log("group : ", data);
+        // console.log("group : ", data);
         setgroups(data)
       })
     }

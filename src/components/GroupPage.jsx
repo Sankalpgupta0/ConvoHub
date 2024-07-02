@@ -241,41 +241,50 @@ const GroupPage = () => {
         <div className='flex flex-col gap-2 py-2 mx-2' ref={currentMessage}>
           {
             allMessage.map((msg, index) => {
+              // console.log("msg : ", msg)
               return (
-                <div key={msg._id} className={` p-1 py-1 rounded w-fit max-w-[280px] md:max-w-sm lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : "bg-white"}`}>
-                  <div className='w-full relative'>
-                    {
-                      msg?.imageUrl && (
-                        <img
-                          src={msg?.imageUrl}
-                          className='w-full h-full object-scale-down'
-                        />
-                      )
-                    }
-                    {
-                      msg?.videoUrl && (
-                        <video
-                          src={msg.videoUrl}
-                          className='w-full h-full object-scale-down'
-                          controls
-                        />
-                      )
-                    }
-                    {
-                      msg?.pdfUrl && (
-                        <label htmlFor="downloadPDF" className='flex justify-between'>
-                          <FaFilePdf size={30} />
-                          <button onClick={() => handleDownloadPDF(msg.pdfUrl)}>
-                            <BsUpload size={20} />
-                          </button>
-                        </label>
+                <>
+                  <div key={msg._id} className={` p-1 py-1 rounded w-fit max-w-[280px] md:max-w-sm lg:max-w-md ${user._id === msg?.msgByUserId ? "ml-auto bg-teal-100" : "bg-white"}`}>
+                    <div className='w-full relative'>
+                      {
+                        msg?.imageUrl && (
+                          <img
+                            src={msg?.imageUrl}
+                            className='w-full h-full object-scale-down'
+                          />
+                        )
+                      }
+                      {
+                        msg?.videoUrl && (
+                          <video
+                            src={msg.videoUrl}
+                            className='w-full h-full object-scale-down'
+                            controls
+                          />
+                        )
+                      }
+                      {
+                        msg?.pdfUrl && (
+                          <label htmlFor="downloadPDF" className='flex justify-between'>
+                            <FaFilePdf size={30} />
+                            <button onClick={() => handleDownloadPDF(msg.pdfUrl)}>
+                              <BsUpload size={20} />
+                            </button>
+                          </label>
 
-                      )
-                    }
+                        )
+                      }
+                    </div>
+                    <p className='px-2'>{msg.text}</p>
+                  <div className=' flex justify-between items-center gap-x-5 py-2'>
+                    <div className='flex justify-center items-center gap-x-5'>
+                      <img src={msg?.userDetails[0].profile_pic} className='h-10 rounded-full'/>
+                      <h1>{msg?.userDetails[0].name}</h1>
+                    </div>
+                    <p className='text-xs ml-auto w-fit'>{moment(msg.createdAt).format('hh:mm')}</p>
                   </div>
-                  <p className='px-2'>{msg.text}</p>
-                  <p className='text-xs ml-auto w-fit'>{moment(msg.createdAt).format('hh:mm')}</p>
-                </div>
+                  </div>
+                </>
               )
             })
           }
