@@ -48,7 +48,7 @@ const Home = () => {
 
     /***socket connection */
     useEffect(() => {
-        const Connection = io(import.meta.env.VITE_BACKEND_URL, {
+        const Connection = io("wss://convohub-server-c6ry.onrender.com", {
             auth: {
                 token: localStorage.getItem('token')
             },
