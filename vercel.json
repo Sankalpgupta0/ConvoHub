@@ -2,7 +2,7 @@
     "rewrites": [
         {
             "source": "/api/:path*",
-            "destination": "https://convohub-server.onrender.com/api/:path*"
+            "destination": "https://convohub-server-c6ry.onrender.com/api/:path*"
         },
         {
             "source": "/(.*)",
