@@ -48,7 +48,7 @@ const Home = () => {
 
     /***socket connection */
     useEffect(() => {
-        const Connection = io("wss://convohub-server-c6ry.onrender.com", {
+        const Connection = io("wss://convohub-server-j9ov.onrender.com", {
             auth: {
                 token: localStorage.getItem('token')
             },

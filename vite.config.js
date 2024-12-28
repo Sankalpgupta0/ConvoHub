@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   server: {
     proxy:{
-      '/api': 'https://convohub-server-c6ry.onrender.com'
+      '/api': 'https://convohub-server-j9ov.onrender.com'
     }
   },
   plugins: [react()],
